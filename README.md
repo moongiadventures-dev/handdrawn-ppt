@@ -36,22 +36,29 @@ PPT 요소를 전부 손그림으로 그려줍니다. 한국어·영어 둘 다 
 
 ## 설치
 
-### Claude Code에서 쓰기
+### Claude Code — 이게 제일 쉽습니다
 
-1. 이 저장소를 받습니다 (`Code → Download ZIP` 또는 아래 명령어)
+폴더를 직접 찾아 들어갈 필요 없습니다. **Claude Code 채팅에 아래를 그대로 붙여넣으세요.**
 
-```bash
-git clone https://github.com/moongiadventures-dev/handdrawn-ppt.git
+```
+https://github.com/moongiadventures-dev/handdrawn-ppt
+이 저장소를 내 스킬 폴더에 클론해줘. 끝나면 뭘 해야 하는지 알려줘.
 ```
 
-2. `handdrawn-ppt` 폴더를 통째로 스킬 폴더 안에 넣습니다
+Claude가 스킬 폴더 위치를 알아서 찾아 클론합니다. 끝나면 **Claude Code를 껐다 켜세요.**
+새 스킬은 재시작해야 인식됩니다. `/handdrawn-ppt` 를 쳤을 때 뜨면 성공입니다.
+
+<details>
+<summary>수동으로 설치하고 싶다면</summary>
+
+`Code → Download ZIP`으로 받아서 압축을 풀고, 폴더째로 아래 위치에 넣습니다.
 
 | OS | 넣을 위치 |
 |---|---|
 | macOS / Linux | `~/.claude/skills/handdrawn-ppt/` |
 | Windows | `C:\Users\<사용자이름>\.claude\skills\handdrawn-ppt\` |
 
-폴더 안에 `SKILL.md`가 바로 보이는 구조여야 합니다.
+폴더를 열었을 때 `SKILL.md`가 바로 보이는 구조여야 합니다.
 
 ```
 .claude/skills/handdrawn-ppt/
@@ -59,12 +66,17 @@ git clone https://github.com/moongiadventures-dev/handdrawn-ppt.git
 └── references/style_lock/*.png
 ```
 
-3. Claude Code를 껐다 켭니다. 새 스킬은 재시작해야 인식됩니다.
+`.claude` 폴더가 안 보이면 숨김 폴더 표시를 켜세요.
+(Windows: 탐색기 → 보기 → 숨긴 항목 / Mac: `Cmd + Shift + .`)
+
+</details>
 
 ### claude.ai(웹)에서 쓰기
 
-`SKILL.md`를 Settings → Capabilities → Skills 에서 업로드합니다.
+웹에서는 클론이 안 되니 `SKILL.md` 파일 하나만 Settings → Capabilities → Skills 에서 업로드합니다.
 (파일 맨 위 `--- name / description ---` 블록이 있어야 업로드됩니다. 이 저장소 파일엔 이미 들어 있습니다.)
+
+참조 이미지는 같이 안 올라가니, 첫 컷을 뽑은 뒤 그 컷을 앵커로 삼아 이어가면 됩니다.
 
 ---
 
