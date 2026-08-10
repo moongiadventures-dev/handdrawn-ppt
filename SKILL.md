@@ -447,6 +447,62 @@ pink round blush / almost no visible neck / short stubby arms and legs
 
 ---
 
+## 11-1. `.pptx`로 내보내기 (발표자료로 쓸 때) ★
+
+캐러셀은 PNG로 끝나지만, **실제 발표에 쓰려면 열리는 파일이 필요하다.**
+`scripts/make_pptx.py`가 삽화 + 텍스트를 16:9 슬라이드로 조립한다.
+
+```bash
+python scripts/make_pptx.py deck.json -o 발표자료.pptx
+```
+
+`deck.json` 스펙과 예시는 `scripts/deck.example.json` 참고. 슬라이드마다:
+
+| 키 | 내용 |
+|---|---|
+| `layout` | `title` / `content`(기본) / `full` / `quote` |
+| `tag` | 좌상단 빨간 라벨 |
+| `headline` | `\n`으로 줄바꿈. 두 줄까지가 보기 좋다 |
+| `body` | 설명. `\n\n`이면 문단이 벌어진다 |
+| `image` | deck.json 기준 상대경로 |
+| `source` | 하단 회색 한 줄 + **발표자 노트에 자동 복사** |
+| `notes` | 발표자 노트에 추가할 말 |
+
+**레이아웃 고르는 법**
+- `title` — 표지. 헤드라인 크게 왼쪽, 삽화 오른쪽
+- `content` — 기본. 본문 왼쪽, 삽화 오른쪽. 설명이 3~5줄일 때
+- `full` — 그림이 주인공일 때. 빅넘버·큰 다이어그램
+- `quote` — 그림 없이 문장만. 챕터 전환
+
+### 주의 두 개
+
+**① 폰트는 이름만 저장된다.** pptx는 폰트 파일을 안 품는다. 여는 PC에 `Gaegu`가 없으면
+다른 폰트로 대체돼서 손글씨 느낌이 사라진다. 발표할 PC에 미리 깔 것 —
+[fonts.google.com/specimen/Gaegu](https://fonts.google.com/specimen/Gaegu).
+못 깔면 `deck.json`의 `"font"`를 `"맑은 고딕"` 같은 걸로 바꾼다.
+
+**② 이미지는 자동으로 축소된다.** 2K 원본을 그대로 넣으면 9장에 26MB가 나온다.
+기본값은 폭 1800px로 줄여서 넣는다(9장 기준 약 13MB). 바꾸려면 `--max-image-width`,
+원본 그대로 쓰려면 `--max-image-width 0`.
+
+### NotebookLM과 붙이기 (소스가 많을 때)
+
+NotebookLM은 **참조 이미지를 못 받는다.** 스타일이 고정 프리셋이라 내 캐릭터로 그리게 할 수 없다.
+대신 NotebookLM CLI는 **편집 가능한 pptx**를 내주므로 이렇게 나눠 쓴다.
+
+```
+소스(PDF·URL·유튜브) → NotebookLM으로 내용·구조 뽑기
+      notebooklm generate slide-deck --format detailed
+      notebooklm download slide-deck ./base.pptx --format pptx
+                    ↓
+이 스킬로 슬라이드별 삽화 생성 → python-pptx로 이미지 교체
+```
+
+소스가 적으면 NotebookLM을 거치지 말고 §9-2 자료조사 + `make_pptx.py`가 낫다.
+레이아웃·폰트·출처 배치를 전부 통제할 수 있다.
+
+---
+
 ## 12. 저장 규칙
 
 ```
